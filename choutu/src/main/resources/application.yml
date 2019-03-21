@@ -1,0 +1,8 @@
+server:
+  port: 1980
+security:
+  basic:
+    enabled: true
+  user:
+    name: choutu
+    password: choutu

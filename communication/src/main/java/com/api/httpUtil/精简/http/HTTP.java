@@ -2,7 +2,7 @@ package com.api.httpUtil.精简.http;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.io.IOUtils;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -21,6 +21,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
+import org.apache.lucene.util.IOUtils;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -108,7 +109,7 @@ public class HTTP {
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 InputStream instream = entity.getContent();
-                result = IOUtils.toString(instream, "UTF-8");
+                result = inputStream2String(instream);
             }
         } catch (IOException e) {
             throw new RmtException(e.getMessage());
@@ -116,6 +117,14 @@ public class HTTP {
         return JSON.parseObject(result);
     }
 
+    public  static String   inputStream2String   (InputStream   in)   throws   IOException   {
+        StringBuffer   out   =   new   StringBuffer();
+        byte[]   b   =   new   byte[4096];
+        for   (int   n;   (n   =   in.read(b))   !=   -1;)   {
+            out.append(new   String(b,   0,   n));
+        }
+        return   out.toString();
+    }
     /**
      * 发送 POST 请求（HTTP），不带输入数据
      *

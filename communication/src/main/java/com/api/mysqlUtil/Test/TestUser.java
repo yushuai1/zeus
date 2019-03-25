@@ -1,5 +1,8 @@
 package com.api.mysqlUtil.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TestUser {
 
     private String name;
@@ -58,5 +61,24 @@ public class TestUser {
                 ", age=" + age +
                 ", classes='" + classes + '\'' +
                 '}';
+    }
+
+
+    public static void main(String[] args) {
+
+        Map<String,String> mm = new HashMap<>();
+        mm.put("asdasdasasd","asd");
+        mm.put("asdasdasad","asd");
+
+        for (Map.Entry<String,String> entry:mm.entrySet()){
+            String k = entry.getKey();
+            if (k.equals("asdasdasad")){
+                continue;
+            }else {
+                mm.remove(k);
+            }
+        }
+
+        System.out.println(mm.size());
     }
 }
